@@ -1,0 +1,17 @@
+90bf3eb97a3b4da2e8a09e8323541884 *DESCRIPTION
+c9c22ddaf40c51f0beb2e7326e21a29e *NAMESPACE
+ccfeebf20a7be30283bd05a9e34363d4 *R/ETMA.R
+1101c475b86fb945acc388bb0e90253f *R/etma-internal.R
+775bbd668bb6d29bb6f3d7426d9481e5 *R/print.ggint.R
+c74cc3b98183387eb212e2869d65654d *R/summary.ggint.R
+5a4a3ac4057835c2b1b672adb6e0c9b3 *build/partial.rdb
+f1a1567bf4343ed3a9b16e33d91a6095 *data/data.GST.rda
+683accf7eaa39202a886db9c46001808 *data/data.PAH.rda
+221245c1c7200e0d1cd9a9e263933bd4 *data/data.RAS.rda
+9321882e0382ac78be7ca4b8fbc35f46 *man/ETMA.Rd
+99c8376b49a0d67a47fbff9da8038c1f *man/data.GST.Rd
+f9937677a9d4ab1bd2ad2d9b6cad6d13 *man/data.PAH.Rd
+c12c9f73a8aa702225bd12d214d324fe *man/data.RAS.Rd
+7280f8a8ca07dbe9c002b5ebb9da6302 *man/etma-package.Rd
+069b3d52f5f1f99755500696cca7518d *man/print.ggint.Rd
+6d1a7bc29b66d6a673a3cf95a6e35ab9 *man/summary.ggint.Rd
