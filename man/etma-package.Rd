@@ -18,6 +18,7 @@ Maintainer: \packageMaintainer{etma}
 \code{\link{ETMA}}, \code{\link{data.GST}}, \code{\link{data.PAH}}, \code{\link{data.RAS}}
 }
 \examples{
+#Detailed tutorial is shown in website <http://rpubs.com/chinlin/ETMA>
 #The simple toy example (just test this algorithm)
 #Note: the computing time in this example is about 3-5 secs
 

@@ -48,10 +48,10 @@ show.detailed.plot = TRUE, show.final.plot = TRUE, show.p.matrix = FALSE)
   \item{max.step.EM}{the maximum number of iterations if convergence is too slow.
 %%     ~~Describe \code{max.step.EM} here~~
 }
-  \item{iterations.step1}{the length of chian to obtain the study-level parameters [p(disease|base),p(SNP1=1),p(SNP2=1)] in step 1.
+  \item{iterations.step1}{the length of chain to obtain the study-level parameters [p(disease|base),p(SNP1=1),p(SNP2=1)] in step 1.
 %%     ~~Describe \code{iterations.step1} here~~
 }
-  \item{iterations.step2}{the length of chian to obtain the global-level parameters [OR(SNP1),OR(SNP2),OR(interaction)] in step 2.
+  \item{iterations.step2}{the length of chain to obtain the global-level parameters [OR(SNP1),OR(SNP2),OR(interaction)] in step 2.
 %%     ~~Describe \code{iterations.step2} here~~
 }
   \item{start.seed}{the start seed of this algorithm (if you want your results can be reproduced). A NULL value means a random seed in this algorithm.
@@ -97,6 +97,7 @@ show.detailed.plot = TRUE, show.final.plot = TRUE, show.p.matrix = FALSE)
 \code{\link{data.GST}}, \code{\link{data.PAH}}, \code{\link{data.RAS}}
 }
 \examples{
+#Detailed tutorial is shown in website <http://rpubs.com/chinlin/ETMA>
 #The simple toy example (just test this algorithm)
 #Note: the computing time in this example is about 3-5 secs
 
