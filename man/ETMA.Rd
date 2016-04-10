@@ -11,7 +11,8 @@ ETMA(case.x1.0, case.x1.1, ctrl.x1.0, ctrl.x1.1,
 case.x2.0, case.x2.1, ctrl.x2.0, ctrl.x2.1,
 data = NULL, sig.level = 0.05, max.step.EM = 20,
 iterations.step1 = 20000, iterations.step2 = 200000, start.seed = NULL,
-show.detailed.plot = TRUE, show.final.plot = TRUE, show.p.matrix = FALSE)
+show.detailed.plot = TRUE, show.final.plot = TRUE,
+show.p.matrix = FALSE, progress.bar = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -66,6 +67,9 @@ show.detailed.plot = TRUE, show.final.plot = TRUE, show.p.matrix = FALSE)
   \item{show.p.matrix}{a logical indicating whether a p.matrix should be printed.
 %%     ~~Describe \code{show.p.matrix} here~~
 }
+  \item{progress.bar}{a logical indicating whether a progress bar should be presented.
+%%     ~~Describe \code{show.p.matrix} here~~
+}
 }
 \value{
   \item{b}{the beta values of each SNP and interaction term (Sequence is SNP1, SNP2, and interaction).}
@@ -92,6 +96,10 @@ show.detailed.plot = TRUE, show.final.plot = TRUE, show.p.matrix = FALSE)
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
+Lin C, Chu CM, Su SL (2016) Epistasis Test in Meta-Analysis: A Multi-Parameter Markov Chain Monte Carlo Model for Consistency of Evidence. PLoS ONE 11(4): e0152891. doi:10.1371/journal.pone.0152891
+%%  ~~ possibly secondary sources and usages ~~
+}
 
 \seealso{
 \code{\link{data.GST}}, \code{\link{data.PAH}}, \code{\link{data.RAS}}

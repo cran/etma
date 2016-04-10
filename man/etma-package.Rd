@@ -14,6 +14,10 @@
 Maintainer: \packageMaintainer{etma}
 }
 \keyword{ package }
+\references{
+Lin C, Chu CM, Su SL (2016) Epistasis Test in Meta-Analysis: A Multi-Parameter Markov Chain Monte Carlo Model for Consistency of Evidence. PLoS ONE 11(4): e0152891. doi:10.1371/journal.pone.0152891
+%%  ~~ possibly secondary sources and usages ~~
+}
 \seealso{
 \code{\link{ETMA}}, \code{\link{data.GST}}, \code{\link{data.PAH}}, \code{\link{data.RAS}}
 }

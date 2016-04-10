@@ -1,5 +1,5 @@
 ETMA <-
-function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,data=NULL,sig.level=0.05,max.step.EM=20,iterations.step1=20000,iterations.step2=200000,start.seed=NULL,show.detailed.plot=TRUE,show.final.plot=TRUE,show.p.matrix=FALSE) {
+function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,data=NULL,sig.level=0.05,max.step.EM=20,iterations.step1=20000,iterations.step2=200000,start.seed=NULL,show.detailed.plot=TRUE,show.final.plot=TRUE,show.p.matrix=FALSE,progress.bar=TRUE) {
   if (is.null(start.seed)==F) {set.seed(start.seed)}
   dat <- list(x1 = substitute(case.x1.0),
                 x2 = substitute(case.x1.1),
@@ -43,17 +43,17 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
       Step2.list.OR=list()
       Step2.list.LKH=list()
       for (a in 1:max.step.EM) {
-        cat("Start to step 1 in iteration = ",a,".\n")
+        if (progress.bar) {cat("Start to step 1 in iteration = ",a,".\n")}
         if (a==1) {
           Step1.list=.MCMC.step1(x1,x2,x3,x4,x5,x6,x7,x8,
-                                 OR.SNP1=1,OR.SNP2=1,OR.ME=1,iterations.step1=iterations.step1)
+                                 OR.SNP1=1,OR.SNP2=1,OR.ME=1,iterations.step1=iterations.step1,progress.bar=progress.bar)
         } else {
           Step1.list=.MCMC.step1(x1,x2,x3,x4,x5,x6,x7,x8,
-                                 OR.SNP1=Step2.list.OR[[a-1]][1],OR.SNP2=Step2.list.OR[[a-1]][2],OR.ME=Step2.list.OR[[a-1]][3],iterations.step1=iterations.step1)
+                                 OR.SNP1=Step2.list.OR[[a-1]][1],OR.SNP2=Step2.list.OR[[a-1]][2],OR.ME=Step2.list.OR[[a-1]][3],iterations.step1=iterations.step1,progress.bar=progress.bar)
         }
-        cat("Start to step 2 in iteration = ",a,".\n")
+        if (progress.bar) {cat("Start to step 2 in iteration = ",a,".\n")}
         Outcome.step2=.MCMC.step2(x1,x2,x3,x4,x5,x6,x7,x8,
-                                  step1.list=Step1.list,iterations.step2=iterations.step2,show.plot=show.detailed.plot)
+                                  step1.list=Step1.list,iterations.step2=iterations.step2,show.plot=show.detailed.plot,progress.bar=progress.bar)
         Step2.list.b[[a]]=Outcome.step2$b
         Step2.list.vcov[[a]]=Outcome.step2$vcov
         Step2.list.OR[[a]]=Outcome.step2$OR

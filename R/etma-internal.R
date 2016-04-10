@@ -40,7 +40,7 @@ function (OR.SNP1,OR.SNP2,OR.ME,step=0.05) {
   return(new.OR)
 }
 .MCMC.step1 <-
-function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,OR.SNP1,OR.SNP2,OR.ME,iterations.step1=20000,step.random.walk=0.1,p1.times=3) {
+function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,OR.SNP1,OR.SNP2,OR.ME,iterations.step1=20000,step.random.walk=0.1,p1.times=3,progress.bar=TRUE) {
   N.study=length(case.x1.0)
   Outcome.list=list()
   Outcome=matrix(NA,nrow=N.study,ncol=9)
@@ -50,7 +50,7 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
   colnames(se.matrix)=c("p1","p5","p6")
   rownames(se.matrix)=1:N.study
   options(warn=-1)
-  pb <- txtProgressBar(max = N.study*iterations.step1, style=3)
+  if (progress.bar) {pb <- txtProgressBar(max = N.study*iterations.step1, style=3)}
   for (i in 1:N.study) {
     chain = array(dim = c(iterations.step1+1,3))
     chain[1,] = c(0.01,(ctrl.x1.1[i]+0.5)/(ctrl.x1.0[i]+ctrl.x1.1[i]+1),(ctrl.x2.1[i]+0.5)/(ctrl.x2.0[i]+ctrl.x2.1[i]+1))
@@ -64,7 +64,7 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
         } else {
         if (runif(1) > prop) {chain[1+k,]=chain[k,]}
       }
-      setTxtProgressBar(pb, k+(i-1)*iterations.step1)
+      if (progress.bar) {setTxtProgressBar(pb, k+(i-1)*iterations.step1)}
       if (round(k/300)==k/300) {
         acceptance=1-mean(duplicated(chain[(k-299):k,]))
         if (acceptance<0.2) {step.random.walk=step.random.walk*0.9}
@@ -77,7 +77,7 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
     Outcome[i,c(3,6,9)]=Outcome[i,c(1,4,7)]+qnorm(0.975)*se.matrix[i,]
     Outcome[i,]=exp(Outcome[i,])/(1+exp(Outcome[i,]))
   }
-  close(pb)
+  if (progress.bar) {close(pb)}
   options(warn=0)
   Outcome.list[[1]]=Outcome
   Outcome.list[[2]]=log(Outcome/(1-Outcome))[,c(1,4,7)]
@@ -86,14 +86,14 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
   return(Outcome.list)
 }
 .MCMC.step2 <-
-function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,step1.list,iterations.step2=200000,step.random.walk=0.05,show.plot=TRUE) {
+function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,step1.list,iterations.step2=200000,step.random.walk=0.05,show.plot=TRUE,progress.bar=TRUE) {
   chain = array(dim = c(iterations.step2+1,3))
   chain[1,] = c(1,1,1)
   b.matrix=step1.list[[2]]
   se.matrix=step1.list[[3]]
   N.study=length(case.x1.0)
   options(warn=-1)
-  pb <- txtProgressBar(max = iterations.step2, style=3)
+  if (progress.bar) {pb <- txtProgressBar(max = iterations.step2, style=3)}
   for (k in 1:iterations.step2) {
     chain[1+k,]=.RW.2(chain[k,1],chain[k,2],chain[k,3],step=step.random.walk)
     pre.LKH=.LKK(case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,ctrl.x2.1,step1.list[[1]][,1],step1.list[[1]][,4],step1.list[[1]][,7],chain[k,1],chain[k,2],chain[k,3])
@@ -109,9 +109,9 @@ function (case.x1.0,case.x1.1,ctrl.x1.0,ctrl.x1.1,case.x2.0,case.x2.1,ctrl.x2.0,
       if (acceptance<0.2) {step.random.walk=step.random.walk*0.9}
       if (acceptance>0.3) {step.random.walk=step.random.walk*1.1}
     }
-    setTxtProgressBar(pb,k)
+    if (progress.bar) {setTxtProgressBar(pb,k)}
   }
-  close(pb)
+  if (progress.bar) {close(pb)}
   options(warn=0)
   if (show.plot) {
   par(mfrow=c(2,3))
